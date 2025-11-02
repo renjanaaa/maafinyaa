@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry... Ungee💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 30px;
+            padding: 60px 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(236, 72, 153, 0.2);
+            text-align: center;
+        }
+
+        .heart-emoji {
+            font-size: 80px;
+            display: block;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            color: #ec4899;
+            font-size: 32px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .yes-btn {
+            background: #ec4899;
+            color: white;
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3);
+        }
+
+        .yes-btn:hover {
+            background: #db2777;
+            transform: scale(1.05);
+            box-shadow: 0 15px 35px rgba(236, 72, 153, 0.4);
+        }
+
+        .no-btn {
+            background: #f3f4f6;
+            color: #666;
+            position: relative;
+        }
+
+        .no-btn:hover {
+            background: #e5e7eb;
+        }
+
+        /* Success Page */
+        .success-page {
+            display: none;
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .hug-btn {
+            background: #fbbf24;
+            color: #78350f;
+            margin-top: 30px;
+            padding: 16px 40px;
+            font-size: 18px;
+        }
+
+        .hug-btn:hover {
+            background: #f59e0b;
+            transform: scale(1.1);
+        }
+
+        .closing-message {
+            color: #ec4899;
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 20px;
+            display: none;
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .heart-emoji {
+                font-size: 60px;
+            }
+
+            p {
+                font-size: 14px;
+            }
+
+            button {
+                padding: 12px 24px;
+                font-size: 14px;
+                min-width: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Apology Page -->
+        <div class="apology-page">
+            <span class="heart-emoji">💕</span>
+            <h1>For u Ungee, my Lovely Girl</h1>
+            <p>Sayangg… aku bener-bener minta maaf atas kesalahanku. Aku tahu aku bikin kamu kecewa, tapi aku sungguh mau berubah. Kamu mau maafin aku kan?</p>
+            
+            <div class="buttons">
+                <button class="yes-btn" onclick="handleYes()">Ya, Aku Maafin Kamu</button>
+                <button class="no-btn" onclick="moveButton(event)">Ngga Dimaafin</button>
+            </div>
+        </div>
+
+        <!-- Success Page -->
+        <div class="success-page">
+            <span class="heart-emoji">🤗</span>
+            <h1>Makasih sayanggg, udah mau maafin akuu…</h1>
+            <p>Kamu perlu tau, mungkin hal kecil ini — yang buat orang lain keliatan sepele — tapi buat aku, ini adalah perjuangan kecilku buat minta maaf ke kamu.
+                Mulai sekarang…
+                aku bakal membuktikan bahwa aku bener-bener mencintaimu dengan tulus, menyayangimu, dan aku bener-bener mencintaimu, Ungeee 🤍</p>
+            
+            <button class="hug-btn" onclick="sendHug()">Peluk virtual🤗</button>
+            <div class="closing-message">Terimakasih sayang udah memaafkanku, Love uuuu 💕</div>
+        </div>
+    </div>
+
+    <script>
+        function moveButton(e) {
+            const btn = e.target;
+            const randomX = Math.random() * (window.innerWidth - 200);
+            const randomY = Math.random() * (window.innerHeight - 100);
+            
+            btn.style.position = 'fixed';
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+        }
+
+        function handleYes() {
+            document.querySelector('.apology-page').style.display = 'none';
+            document.querySelector('.success-page').style.display = 'block';
+            createConfetti();
+        }
+
+        function sendHug() {
+            createConfetti();
+            setTimeout(() => {
+                document.querySelector('.closing-message').style.display = 'block';
+            }, 500);
+        }
+
+        function createConfetti() {
+            const colors = ['#ec4899', '#fbcfe8', '#fce7f3', '#db2777'];
+            const heartEmojis = ['💕', '💗', '💖', '💝', '✨'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                confetti.style.opacity = Math.random() * 0.5 + 0.5;
+                confetti.style.animation = `fall ${Math.random() * 2 + 2}s linear forwards`;
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+    </script>
+</body>
+</html>
